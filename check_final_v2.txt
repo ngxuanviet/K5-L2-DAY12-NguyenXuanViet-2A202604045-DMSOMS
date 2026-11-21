@@ -1,0 +1,10 @@
+File: nop_bai/export_final_v2.zip
+Ảnh: 22 · đã có frame_meta: 22 · số đối tượng: child_seat=14, face=12, face13=6, hand=11, infant_seat=6, object=4, person=12, phone=1
+Kết quả: 0 lỗi, 0 cảnh báo. Cảnh báo cần bạn tự xét, không tự động là sai.
+
+--- Ghi chú giải thích (viết tay) ---
+1. child_seat occupied=yes (S01, S03, S07; cả _rgb và _ir): làm theo cập nhật mới của coach về nhãn trẻ em (bản labels raw mới cho phép occupied = unknown/no/yes); GUIDE.md §4.8 chưa kịp cập nhật. scripts/cabin_schema.py trong máy đã thêm "yes" vào occupied của child_seat để khớp. Đã thống nhất với bạn review chéo.
+2. S02 child_seat rear_left: unknown ở S02_rgb, no ở S02_ir. Cố ý không đồng nhất: ảnh RGB không nhận diện được trạng thái ghế, ảnh IR-sim thấy rõ hơn.
+3. D02: eye_left và eye_right để unknown; 8 điểm mắt của face13 (left_eye_*, right_eye_*) được bật cờ occluded vì mắt bị che, không thấy rõ khe mắt.
+4. Sau review chéo với Bùi Văn Thịnh: đã sửa seatbelt D04, D06 thành worn_correct, on_wheel hai tay D05 thành no, thêm box face ở S07, S08, và đổi box child_seat ở ghế rear_right của S07, S08 (cả _rgb và _ir) thành person vì đó là người lớn (xem disagreement_log.csv).
+5. seatbelt của person ở S07, S08 để unknown (không chắc), bạn Thịnh ghi not_worn; giữ nguyên.
